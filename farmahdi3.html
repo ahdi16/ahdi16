@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AE Dioquino Natural Family Farm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('farm-background.jpg') no-repeat center center/cover;
+            color: #333;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: rgba(76, 175, 80, 0.8);
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        section {
+            padding: 2em;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 2em auto;
+            max-width: 800px;
+        }
+
+        section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .gallery img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .links {
+            margin-top: 2em;
+        }
+
+        .links a {
+            color: #4caf50;
+            text-decoration: none;
+            margin: 0 1em;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cart {
+            border: 1px solid #ccc;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#gallery">Farm Gallery</a></li>
+                <li><a href="#shop">Shop</a></li>
+            </ul>
+        </nav>
+        <h1>AE Dioquino Natural Family Farm</h1>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to Our Organic Farm</h2>
+        <p>Experience the farm-to-table concept where you plant, harvest, and cook your own food.</p>
+    </section>
+
+    <section id="mission">
+        <h2>Our Mission</h2>
+        <p>Our mission is to provide fresh, organic produce directly from our farm to your table. We strive to create a sustainable and eco-friendly environment for our community.</p>
+    </section>
+
+    <section id="vision">
+        <h2>Our Vision</h2>
+        <p>Our vision is to inspire and educate people about the benefits of organic farming and the farm-to-table concept. We aim to be a leading example of sustainable agriculture.</p>
+    </section>
+
+    <section id="gallery">
+        <h2>Farm Gallery</h2>
+        <div class="gallery">
+            <img src="farm1.jpg" alt="Produce 1">
+            <img src="farm2.jpg" alt="Produce 2">
+            <img src="farm3.jpg" alt="Product 1">
+            <img src="farm4.jpg" alt="Product 2">
+            <img src="farm5.jpg" alt="Farm House">
+			<img src="farm6.jpg" alt="Farm House">
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="product">
+            <h3>Eggs</h3>
+            <p>Fresh organic eggs from our farm.</p>
+            <button onclick="addToCart('Eggs', 5)">Small (Php 11)</button>
+			<button onclick="addToCart('Eggs', 5)">Medium (Php 12)</button>
+			<button onclick="addToCart('Eggs', 5)">Large (Php 13)</button>
+			<button onclick="addToCart('Eggs', 5)">Per Tray Medium(Php 270)</button>
+        </div>
+        <div class="product">
+            <h3>Vegetables</h3>
+            <p>Fresh organic vegetables from our farm.</p>
+            <button onclick="addToCart('Vegetables', 10)">KangKong (Php20)</button>
+        </div>
+        <div class="cart" id="cart">
+            <h3>Your Cart</h3>
+            <ul id="cart-items"></ul>
+            <p>Total: Php <span id="cart-total">0</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </section>
+
+    <section class="links">
+        <h2>Other Organic Farms</h2>
+        <a href="https://www.exampleorganicfarm1.com" target="_blank">Example Organic Farm 1</a>
+        <a href="https://www.exampleorganicfarm2.com" target="_blank">Example Organic Farm 2</a>
+        <a href="https://www.exampleorganicfarm3.com" target="_blank">Example Organic Farm 3</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2017 AE Dioquino Natural Family Farm. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.item} - $${item.price}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            cartTotal.textContent = total;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cart)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Order placed successfully!');
+                    cart = [];
+                    updateCart();
+                } else {
+                    alert('Failed to place order.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to place order.');
+            });
+        }
+
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
